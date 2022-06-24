@@ -8,7 +8,7 @@ const pages = ["/home", "/about", "/projects", "/contact"];
 
 const server = http.createServer((req, res) => {
   if (pages.includes(req.url) == true) {
-    const file = __dirname + url.parse(req.url).path + ".html";
+    const file =path.join(__dirname,url.parse(req.url).path +".html");
     fs.readFile(file, (err, data) => {
       if (err) throw err;
       res.statusCode = 200;
@@ -31,14 +31,6 @@ const server = http.createServer((req, res) => {
         res.end(data);
       });
   }
-  // if(req.url="style.css"){
-  //     fs.readFile('style.css', (err, data)=>{
-  //         if(err) throw err;
-  //         res.statusCode=200;
-  //         res.setHeader('content-type','text/css');
-  //         res.end(data);
-  //     })
-  // }
 });
 
 server.listen(port, () => {
